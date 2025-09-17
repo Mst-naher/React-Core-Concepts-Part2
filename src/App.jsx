@@ -5,6 +5,7 @@ import Users from './Users';
 import Posts from './Posts';
 import { Suspense } from 'react';
 import Friends from './Friends';
+import Photos from './Photos';
 
 
 
@@ -29,6 +30,12 @@ import Friends from './Friends';
 // return res.json()
 // }
 
+const fetchPhotos = async() =>{
+  const res = await fetch("https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast")
+
+return res.json()
+}
+
 
 
 
@@ -38,6 +45,8 @@ function App() {
   // const friendsPromise = fetchFriends();
 
   // const postsPromise = fetchPosts()
+
+  const photosPromise = fetchPhotos()
 
 function handleClick(){ 
   alert('I am clicked.')
@@ -55,9 +64,13 @@ alert(newNum);
     <>
       <h3>Vite + React</h3>
 
-      <Suspense fallback={<h3>Posts are coming soon ...</h3>}>
-        <Posts postsPromise={postsPromise}></Posts>
+      <Suspense fallback={<h3>Photos are Coming soon ...</h3>}>
+        <Photos photosPromise={photosPromise}></Photos>
       </Suspense>
+
+      {/* <Suspense fallback={<h3>Posts are coming soon ...</h3>}>
+        <Posts postsPromise={postsPromise}></Posts>
+      </Suspense> */}
 
       {/* <Suspense fallback={<h3>Loading ...</h3>}>
         <Users fetchUsers={fetchUsers}></Users>
